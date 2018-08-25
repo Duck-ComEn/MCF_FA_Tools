@@ -1,5 +1,8 @@
 
 *.class
+<<<<<<< HEAD
 build/classes/mcf_fa_tools/MainMenu.form
 *.form
 *.form
+=======
+>>>>>>> 7f2cf108550b40b798d11212f5257b51c56a56f5
