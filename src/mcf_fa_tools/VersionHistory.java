@@ -68,7 +68,7 @@ public class VersionHistory extends javax.swing.JFrame {
 
         LabelVersionNum.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabelVersionNum.setForeground(new java.awt.Color(0, 153, 51));
-        LabelVersionNum.setText("00.01");
+        LabelVersionNum.setText("00.02");
 
         jLabelFeatureList.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelFeatureList.setText("Feature support:");
