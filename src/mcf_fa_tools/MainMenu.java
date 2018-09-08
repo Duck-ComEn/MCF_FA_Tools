@@ -5,9 +5,20 @@
  */
 package mcf_fa_tools;
 
-import java.net.URL;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
-
+import jcifs.smb.NtlmPasswordAuthentication;
+import jcifs.smb.SmbFile;
+import jcifs.smb.SmbFileOutputStream;
 /**
  *
  * @author 7162859
@@ -99,6 +110,11 @@ public class MainMenu extends javax.swing.JFrame {
         jLabelTestCode.setText("Test code name:");
 
         jComboBoxTester.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTesterActionPerformed(evt);
+            }
+        });
 
         jTextFieldSN.setText("xxxxxxxx");
         jTextFieldSN.setToolTipText("Example XXXXXXXX");
@@ -277,15 +293,17 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelTester1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -431,6 +449,10 @@ public class MainMenu extends javax.swing.JFrame {
       // TODO add your handling code here:
   }//GEN-LAST:event_MenuHelpMouseClicked
 
+    private void jComboBoxTesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTesterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTesterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -464,7 +486,7 @@ public class MainMenu extends javax.swing.JFrame {
                 MainMenu mainmenu = new MainMenu();
                 mainmenu.pack();
                 mainmenu.setLocationRelativeTo(null);
-                mainmenu.setVisible(true);
+                mainmenu.setVisible(true);     
             }
         });
     }
@@ -531,4 +553,30 @@ public class MainMenu extends javax.swing.JFrame {
         MainMenu.versionHistory = versionHistory;
     }
     
+    public void checkLoginLanNetwork () {
+       try {
+            String yourPeerIP = "DFX8350";
+            String path = "smb://" + yourPeerIP + "/AdminShareFolder/";
+            String smbUser = "Admin";
+            String smbPass = "123456";
+            NtlmPasswordAuthentication auth1;
+            auth1 = new NtlmPasswordAuthentication(
+                    "", smbUser, smbPass);
+            SmbFile smbFile = new SmbFile(path, auth1);
+
+                List<SmbFile> files = Arrays.asList(smbFile.listFiles());
+                for (SmbFile file : files) {
+                    if (file.isDirectory()) {
+                        System.out.println("Directory: " + file.getName());
+                    }
+                    if (file.isFile()) {
+                        System.out.println("File: " + file.getName());
+                    }
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
 }
