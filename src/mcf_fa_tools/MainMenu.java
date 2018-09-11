@@ -5,6 +5,7 @@
  */
 package mcf_fa_tools;
 
+import java.awt.Component;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -16,15 +17,18 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbFile;
 import jcifs.smb.SmbFileOutputStream;
+
 /**
  *
  * @author 7162859
  */
 public class MainMenu extends javax.swing.JFrame {
-/**
+
+    /**
      * Creates new form MainMenu constructor
      */
     public MainMenu() {
@@ -35,6 +39,7 @@ public class MainMenu extends javax.swing.JFrame {
         setIconImage(icon.getImage());
         this.setVersionHistory(new VersionHistory());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +74,8 @@ public class MainMenu extends javax.swing.JFrame {
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
+        jButtonAddTester1 = new javax.swing.JButton();
+        jButtonAddTester2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jButtonGetRawdata = new javax.swing.JButton();
         jButtonGetWrapper = new javax.swing.JButton();
@@ -89,7 +96,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MCF FA tools");
-        setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
         jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -139,6 +145,11 @@ public class MainMenu extends javax.swing.JFrame {
         jButtonAddTester.setText("Add");
         jButtonAddTester.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButtonAddTester.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonAddTester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddTesterActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("To");
 
@@ -154,6 +165,19 @@ public class MainMenu extends javax.swing.JFrame {
         jCheckBox3.setText("Final");
 
         jCheckBox4.setText("Featuring");
+
+        jButtonAddTester1.setText("Delete");
+        jButtonAddTester1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonAddTester1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jButtonAddTester2.setText("Edit");
+        jButtonAddTester2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButtonAddTester2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonAddTester2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddTester2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -171,7 +195,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(jLabelTestCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                         .addComponent(jLabelSN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelMFGID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
@@ -190,15 +214,21 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addGap(26, 26, 26)
-                                .addComponent(jTextFieldEnddate, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                                .addComponent(jTextFieldEnddate))
                             .addComponent(jTextFieldSN, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldMFGID)
                             .addComponent(jTextFieldTestCode)
                             .addComponent(jTextFieldPfcode)
-                            .addComponent(jComboBoxTester, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                .addComponent(jComboBoxTester, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddTester, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAddTester2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAddTester, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5))))
+                        .addComponent(jButtonAddTester1)
+                        .addGap(20, 20, 20))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,12 +267,13 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jLabelTestCode4)
                     .addComponent(jTextFieldCellID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAddTester)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelTester, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxTester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTester, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTester, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddTester, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAddTester1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonAddTester2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldEnddate, jTextFieldstartDate});
@@ -259,13 +290,9 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonGetRawdata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonGetWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                    .addComponent(jButtonGetSCCCOM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jButtonGetRawdata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButtonGetWrapper, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+            .addComponent(jButtonGetSCCCOM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,12 +324,12 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)))
                         .addGap(80, 80, 80))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelTester1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -449,6 +476,14 @@ public class MainMenu extends javax.swing.JFrame {
       // TODO add your handling code here:
   }//GEN-LAST:event_MenuHelpMouseClicked
 
+    private void jButtonAddTester2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTester2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAddTester2ActionPerformed
+
+    private void jButtonAddTesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTesterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAddTesterActionPerformed
+
     private void jComboBoxTesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTesterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxTesterActionPerformed
@@ -483,10 +518,23 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainMenu mainmenu = new MainMenu();
-                mainmenu.pack();
-                mainmenu.setLocationRelativeTo(null);
-                mainmenu.setVisible(true);     
+                try {
+                    MainMenu mainmenu = new MainMenu();
+                    mainmenu.pack();
+                    mainmenu.setLocationRelativeTo(null);
+                    //readPreviousConfiguration();
+                    mainmenu.setVisible(true);
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    System.out.println(e.getMessage());
+                    //custom title, error icon
+                    JOptionPane.showMessageDialog(null,e.getMessage(),"Program catch",JOptionPane.ERROR_MESSAGE);
+                    System.exit(1);
+                }
+            }
+
+            private void readPreviousConfiguration() {
+                throw new UnsupportedOperationException("readPreviousConfiguration Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }
@@ -498,6 +546,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JMenu MenuFile;
     private javax.swing.JMenu MenuHelp;
     private javax.swing.JButton jButtonAddTester;
+    private javax.swing.JButton jButtonAddTester1;
+    private javax.swing.JButton jButtonAddTester2;
     private javax.swing.JButton jButtonGetRawdata;
     private javax.swing.JButton jButtonGetSCCCOM;
     private javax.swing.JButton jButtonGetWrapper;
@@ -535,9 +585,10 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldTestCode;
     private javax.swing.JTextField jTextFieldstartDate;
     // End of variables declaration//GEN-END:variables
-   
+
     // manual parametor and medthod
     private static VersionHistory versionHistory;
+
     public void showVersionHistory() {
         if (getVersionHistory().isVisible() == false) {
             getVersionHistory().pack();
@@ -549,12 +600,13 @@ public class MainMenu extends javax.swing.JFrame {
     public VersionHistory getVersionHistory() {
         return versionHistory;
     }
+
     public static void setVersionHistory(VersionHistory versionHistory) {
         MainMenu.versionHistory = versionHistory;
     }
-    
-    public void checkLoginLanNetwork () {
-       try {
+
+    public void checkLoginLanNetwork() {
+        try {
             String yourPeerIP = "DFX8350";
             String path = "smb://" + yourPeerIP + "/AdminShareFolder/";
             String smbUser = "Admin";
@@ -564,15 +616,15 @@ public class MainMenu extends javax.swing.JFrame {
                     "", smbUser, smbPass);
             SmbFile smbFile = new SmbFile(path, auth1);
 
-                List<SmbFile> files = Arrays.asList(smbFile.listFiles());
-                for (SmbFile file : files) {
-                    if (file.isDirectory()) {
-                        System.out.println("Directory: " + file.getName());
-                    }
-                    if (file.isFile()) {
-                        System.out.println("File: " + file.getName());
-                    }
+            List<SmbFile> files = Arrays.asList(smbFile.listFiles());
+            for (SmbFile file : files) {
+                if (file.isDirectory()) {
+                    System.out.println("Directory: " + file.getName());
                 }
+                if (file.isFile()) {
+                    System.out.println("File: " + file.getName());
+                }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
