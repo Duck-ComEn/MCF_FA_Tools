@@ -6,3 +6,5 @@ build/classes/mcf_fa_tools/*
 dist/lib/*.*
 dist/*.*
 nbproject/project.properties
+*.properties
+*.jar
