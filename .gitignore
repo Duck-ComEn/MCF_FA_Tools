@@ -7,4 +7,3 @@ dist/lib/*.*
 dist/*.*
 nbproject/project.properties
 *.properties
-*.jar
