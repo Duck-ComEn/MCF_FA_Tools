@@ -1,14 +1,10 @@
 
 *.class
-<<<<<<< HEAD
-build/classes/mcf_fa_tools/MainMenu.form
-*.form
-*.form
-=======
->>>>>>> 7f2cf108550b40b798d11212f5257b51c56a56f5
 build/built-jar.properties
+build/classes/.netbeans_automatic_build
+build/classes/.netbeans_update_resources
+dist/lib/AbsoluteLayout.jar
+dist/lib/beansbinding-1.2.1.jar
 dist/MCF_FA_Tools.jar
-*.jar
-*.jar
-*.properties
 dist/README.TXT
+nbproject/project.properties
