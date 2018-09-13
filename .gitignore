@@ -1,10 +1,8 @@
 
 *.class
 build/built-jar.properties
-build/classes/.netbeans_automatic_build
-build/classes/.netbeans_update_resources
-dist/lib/AbsoluteLayout.jar
-dist/lib/beansbinding-1.2.1.jar
-dist/MCF_FA_Tools.jar
-dist/README.TXT
+build/classes/*.*
+build/classes/mcf_fa_tools/*
+dist/lib/*.*
+dist/*.*
 nbproject/project.properties
